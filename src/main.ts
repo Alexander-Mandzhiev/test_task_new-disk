@@ -3,9 +3,11 @@ import { AppModule } from './app.module';
 import { Logger } from '@nestjs/common';
 import { ConfigService } from './config/config.service';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { NestExpressApplication } from '@nestjs/platform-express';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  app.disable('x-powered-by', 'X-Powered-By');
 
   const config = new DocumentBuilder()
     .setTitle('Новый Диск - тестовое задание')
